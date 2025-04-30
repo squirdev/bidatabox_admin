@@ -41,7 +41,7 @@ export default function Home() {
       setTotalCount(result.total);
     } else {
       showAlert("出了点问题。");
-      // router.push("/login");
+      router.push("/login");
     }
     setIsLoading(false);
   };
@@ -57,6 +57,7 @@ export default function Home() {
       }
     } catch (error) {
       showAlert("Something went wrong.");
+      router.push("/login");
     } finally {
       setIsLoading(false);
     }
@@ -131,52 +132,50 @@ export default function Home() {
             </thead>
             <tbody>
               <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-              {chargeLogList && chargeLogList.length !== 0 ? (
-                chargeLogList.map((row, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {index + 1}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.username}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.amount}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {getSimplifiedDateTime(row.createdAt)}
-                        </Typography>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <TableNoData colSpan={TABLE_HEAD.length} />
-              )}
+              {chargeLogList && chargeLogList.length !== 0
+                ? chargeLogList.map((row, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {index + 1}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.username}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.amount}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {getSimplifiedDateTime(row.createdAt)}
+                          </Typography>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
             </tbody>
           </table>
         </div>

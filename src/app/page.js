@@ -3,18 +3,10 @@
 import { useEffect, useState } from "react";
 
 import { BsArrowCounterclockwise } from "react-icons/bs";
-import {
-  Button,
-  Switch,
-  Typography,
-  Input,
-  Option,
-  Select,
-} from "@material-tailwind/react";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { Typography, Input, Option, Select } from "@material-tailwind/react";
 
 import { useLanguage } from "../../context/LanguageProvider";
-import { getUserList, updateUserActive } from "./api/user";
+import { getUserList } from "./api/user";
 import { getSimplifiedDateTime } from "./helper";
 import { useAlert } from "../../context/alertContext";
 import { useRouter } from "next/navigation";
@@ -180,46 +172,44 @@ export default function Home() {
           </thead>
           <tbody>
             <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-            {activityLogList && activityLogList.length != 0 ? (
-              activityLogList.map((row, index) => {
-                return (
-                  <tr key={index} className="hover:bg-gray-100">
-                    <td>
-                      <Typography variant="small" className="p-4">
-                        {index + 1}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">{row.username}</Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">
-                        {row.entirenumber}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">{row.type}</Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">{row.perprice}</Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">{row.consume}</Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">{row.benefit}</Typography>
-                    </td>
-                    <td>
-                      <Typography variant="small">
-                        {getSimplifiedDateTime(row.createdAt)}
-                      </Typography>
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <TableNoData colSpan={TABLE_HEAD.length} />
-            )}
+            {activityLogList && activityLogList.length != 0
+              ? activityLogList.map((row, index) => {
+                  return (
+                    <tr key={index} className="hover:bg-gray-100">
+                      <td>
+                        <Typography variant="small" className="p-4">
+                          {index + 1}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">{row.username}</Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">
+                          {row.entirenumber}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">{row.type}</Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">{row.perprice}</Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">{row.consume}</Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">{row.benefit}</Typography>
+                      </td>
+                      <td>
+                        <Typography variant="small">
+                          {getSimplifiedDateTime(row.createdAt)}
+                        </Typography>
+                      </td>
+                    </tr>
+                  );
+                })
+              : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
           </tbody>
         </table>
       </div>

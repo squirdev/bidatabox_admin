@@ -145,83 +145,81 @@ export default function Home() {
             </thead>
             <tbody>
               <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-              {detectList && detectList.length !== 0 ? (
-                detectList.map((row, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.username}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.taskname}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.fileurl ?? "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {getSimplifiedDateTime(row.createdAt)}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.entirenumber}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.activenumber != null
-                            ? row.activenumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.unregisternumber != null
-                            ? row.unregisternumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <TableNoData colSpan={TABLE_HEAD.length} />
-              )}
+              {detectList && detectList.length !== 0
+                ? detectList.map((row, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.username}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.taskname}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.fileurl ?? "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {getSimplifiedDateTime(row.createdAt)}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.entirenumber}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.activenumber != null
+                              ? row.activenumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.unregisternumber != null
+                              ? row.unregisternumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
             </tbody>
           </table>
         </div>
