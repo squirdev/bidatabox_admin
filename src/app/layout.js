@@ -26,7 +26,7 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>admin bidatabox</title>
+        <title>admin RedKingData</title>
       </head>
       <body className="flex">
         <ReduxProvider>
