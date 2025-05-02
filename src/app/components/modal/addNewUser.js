@@ -17,9 +17,9 @@ const AddNewUserModal = ({ open, setOpen }) => {
   const [userName, setUserName] = useState(generateRandomString(10));
   const [password, setPassword] = useState(generateRandomString(10));
   const [realName, setRealName] = useState("");
-  const [tgCost, setTGCost] = useState(5.715);
-  const [wsCost, setWSCost] = useState(2.142);
-  const [phoneStatusCost, setPhoneStatusCost] = useState(3.571);
+  const [tgCost, setTGCost] = useState(500);
+  const [wsCost, setWSCost] = useState(200);
+  const [phoneStatusCost, setPhoneStatusCost] = useState(300);
 
   const [isLoading, setIsLoading] = useState(false);
 
