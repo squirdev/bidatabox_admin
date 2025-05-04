@@ -17,9 +17,9 @@ const AddNewUserModal = ({ open, setOpen }) => {
   const [userName, setUserName] = useState(generateRandomString(10));
   const [password, setPassword] = useState(generateRandomString(10));
   const [realName, setRealName] = useState("");
-  const [tgCost, setTGCost] = useState(500);
-  const [wsCost, setWSCost] = useState(200);
-  const [phoneStatusCost, setPhoneStatusCost] = useState(300);
+  const [tgCost, setTGCost] = useState(1250);
+  const [wsCost, setWSCost] = useState(1250);
+  const [phoneStatusCost, setPhoneStatusCost] = useState(1250);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -109,7 +109,7 @@ const AddNewUserModal = ({ open, setOpen }) => {
               value={tgCost}
               onChange={(e) => setTGCost(e.target.value)}
               label="TG Days Detection Cost"
-              placeholder="Points per 10000 ( default 5.715 )"
+              placeholder="Points per 200000 ( default 1250 )"
             />
             <Input
               variant="static"
@@ -117,7 +117,7 @@ const AddNewUserModal = ({ open, setOpen }) => {
               value={wsCost}
               onChange={(e) => setWSCost(e.target.value)}
               label="WS Days Detection Cost"
-              placeholder="Points per 10000 ( default 2.142 )"
+              placeholder="Points per 200000 ( default 1250 )"
             />
           </div>
           <Input
@@ -126,7 +126,7 @@ const AddNewUserModal = ({ open, setOpen }) => {
             value={phoneStatusCost}
             onChange={(e) => setPhoneStatusCost(e.target.value)}
             label="Phone Number Status Detect Cost"
-            placeholder="Points per 10000 ( default 3.571 )"
+            placeholder="Points per 200000 ( default 1250 )"
           />
         </form>
       </DialogBody>
