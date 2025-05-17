@@ -1,21 +1,11 @@
 import axiosApi from "../../../utils/axios";
 
-export const createUser = async (
-  userName,
-  password,
-  realName,
-  tgCost,
-  wsCost,
-  phoneStatusCost
-) => {
+export const createUser = async (userName, password, realName) => {
   try {
     await axiosApi.post("/admin/user/createUser", {
       username: userName,
       password: password,
       realname: realName,
-      tgCost: tgCost,
-      wsCost: wsCost,
-      phoneCost: phoneStatusCost,
     });
     return true;
   } catch (error) {
@@ -23,24 +13,13 @@ export const createUser = async (
   }
 };
 
-export const updateUser = async (
-  userId,
-  userName,
-  password,
-  realName,
-  tgCost,
-  wsCost,
-  phoneStatusCost
-) => {
+export const updateUser = async (userId, userName, password, realName) => {
   try {
     await axiosApi.post("/admin/user/updateUser", {
       id: userId,
       username: userName,
       password: password,
       realname: realName,
-      tgCost: tgCost,
-      wsCost: wsCost,
-      phoneCost: phoneStatusCost,
     });
     return true;
   } catch (error) {

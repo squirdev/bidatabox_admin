@@ -17,9 +17,6 @@ const AddNewUserModal = ({ open, setOpen }) => {
   const [userName, setUserName] = useState(generateRandomString(10));
   const [password, setPassword] = useState(generateRandomString(10));
   const [realName, setRealName] = useState("");
-  const [tgCost, setTGCost] = useState(1250);
-  const [wsCost, setWSCost] = useState(1250);
-  const [phoneStatusCost, setPhoneStatusCost] = useState(1250);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,26 +31,11 @@ const AddNewUserModal = ({ open, setOpen }) => {
   };
 
   const handleCreateUser = async () => {
-    if (
-      !userName ||
-      !password ||
-      !realName ||
-      !tgCost ||
-      !wsCost ||
-      !phoneStatusCost
-    )
-      return;
+    if (!userName || !password || !realName) return;
 
     setIsLoading(true);
 
-    const result = await createUser(
-      userName,
-      password,
-      realName,
-      tgCost,
-      wsCost,
-      phoneStatusCost
-    );
+    const result = await createUser(userName, password, realName);
     if (result) {
       showAlert("User was created successfully", "success");
     } else {
@@ -101,32 +83,6 @@ const AddNewUserModal = ({ open, setOpen }) => {
             label="Real Name"
             value={realName}
             onChange={(e) => setRealName(e.target.value)}
-          />
-          <div className="flex gap-4">
-            <Input
-              variant="static"
-              type="number"
-              value={tgCost}
-              onChange={(e) => setTGCost(e.target.value)}
-              label="TG Days Detection Cost"
-              placeholder="Points per 200000 ( default 1250 )"
-            />
-            <Input
-              variant="static"
-              type="number"
-              value={wsCost}
-              onChange={(e) => setWSCost(e.target.value)}
-              label="WS Days Detection Cost"
-              placeholder="Points per 200000 ( default 1250 )"
-            />
-          </div>
-          <Input
-            variant="static"
-            type="number"
-            value={phoneStatusCost}
-            onChange={(e) => setPhoneStatusCost(e.target.value)}
-            label="Phone Number Status Detect Cost"
-            placeholder="Points per 200000 ( default 1250 )"
           />
         </form>
       </DialogBody>

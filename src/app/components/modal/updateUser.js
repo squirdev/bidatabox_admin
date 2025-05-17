@@ -17,18 +17,12 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
   const [userName, setUserName] = useState(userData?.username);
   const [password, setPassword] = useState(userData?.password);
   const [realName, setRealName] = useState(userData?.realname);
-  const [tgCost, setTGCost] = useState(userData?.tgCost);
-  const [wsCost, setWSCost] = useState(userData?.wsCost);
-  const [phoneStatusCost, setPhoneStatusCost] = useState(userData?.phoneCost);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setUserName(userData?.username || "");
     setPassword(userData?.password || "");
     setRealName(userData?.realname || "");
-    setTGCost(userData?.tgCost || 0);
-    setWSCost(userData?.wsCost || 0);
-    setPhoneStatusCost(userData?.phoneCost || 0);
   }, [userData]);
 
   const handleOpen = () => setOpen(!open);
@@ -42,27 +36,11 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
   };
 
   const handleUpdateUser = async () => {
-    if (
-      !userName ||
-      !password ||
-      !realName ||
-      !tgCost ||
-      !wsCost ||
-      !phoneStatusCost
-    )
-      return;
+    if (!userName || !password || !realName) return;
 
     setIsLoading(true);
 
-    const result = await updateUser(
-      userData._id,
-      userName,
-      password,
-      realName,
-      tgCost,
-      wsCost,
-      phoneStatusCost
-    );
+    const result = await updateUser(userData._id, userName, password, realName);
     if (result) {
       showAlert("User was updated successfully", "success");
     } else {
@@ -110,32 +88,6 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
             label="Real Name"
             value={realName}
             onChange={(e) => setRealName(e.target.value)}
-          />
-          <div className="flex gap-4">
-            <Input
-              variant="static"
-              type="number"
-              value={tgCost}
-              onChange={(e) => setTGCost(e.target.value)}
-              label="TG Days Detection Cost"
-              placeholder="Points per 10000 ( default 5.715 )"
-            />
-            <Input
-              variant="static"
-              type="number"
-              value={wsCost}
-              onChange={(e) => setWSCost(e.target.value)}
-              label="WS Days Detection Cost"
-              placeholder="Points per 10000 ( default 2.142 )"
-            />
-          </div>
-          <Input
-            variant="static"
-            type="number"
-            value={phoneStatusCost}
-            onChange={(e) => setPhoneStatusCost(e.target.value)}
-            label="Phone Number Status Detect Cost"
-            placeholder="Points per 10000 ( default 3.571 )"
           />
         </form>
       </DialogBody>
