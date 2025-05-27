@@ -37,21 +37,21 @@ const AddNewUserModal = ({ open, setOpen }) => {
 
     const result = await createUser(userName, password, realName);
     if (result) {
-      showAlert("User was created successfully", "success");
+      showAlert("用户创建成功", "success");
     } else {
-      showAlert("Something went wrong");
+      showAlert("出了点问题。");
     }
     handleOpen();
     setIsLoading(false);
   };
   return (
     <Dialog open={open} handler={handleOpen}>
-      <DialogHeader>Create a new user</DialogHeader>
+      <DialogHeader>创建新用户</DialogHeader>
       <DialogBody>
         <form className="w-full flex flex-col gap-8">
           <div className="relative">
             <Input
-              label="User Name"
+              label="用户名"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -66,7 +66,7 @@ const AddNewUserModal = ({ open, setOpen }) => {
           </div>
           <div className="relative">
             <Input
-              label="Password"
+              label="密码"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -80,7 +80,7 @@ const AddNewUserModal = ({ open, setOpen }) => {
             </Button>
           </div>
           <Input
-            label="Real Name"
+            label="真实姓名"
             value={realName}
             onChange={(e) => setRealName(e.target.value)}
           />
@@ -88,10 +88,10 @@ const AddNewUserModal = ({ open, setOpen }) => {
       </DialogBody>
       <DialogFooter>
         <Button variant="red" onClick={handleOpen} className="mr-1">
-          <span>Cancel</span>
+          <span>取消</span>
         </Button>
         <Button color="green" loading={isLoading} onClick={handleCreateUser}>
-          <span>Confirm</span>
+          <span>确认</span>
         </Button>
       </DialogFooter>
     </Dialog>

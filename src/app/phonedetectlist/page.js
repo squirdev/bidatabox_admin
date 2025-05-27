@@ -3,7 +3,6 @@
 import { Input, Option, Select, Typography } from "@material-tailwind/react";
 
 import { BsArrowCounterclockwise } from "react-icons/bs";
-import { useLanguage } from "../../../context/LanguageProvider";
 import { useEffect, useState } from "react";
 import { phoneDetectList } from "../api/service";
 import { getSimplifiedDateTime } from "../helper";
@@ -24,7 +23,6 @@ export default function Home() {
   const [userList, setUserList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { t } = useLanguage();
   const { showAlert } = useAlert();
   const router = useRouter();
 
@@ -45,7 +43,7 @@ export default function Home() {
         router.push("/login");
       }
     } catch (error) {
-      showAlert("Something went wrong. Try agin");
+      showAlert("出了点问题。请重试");
       router.push("/login");
     } finally {
       setIsLoading(false);
@@ -58,11 +56,11 @@ export default function Home() {
       const result = await getUserList();
       if (result.data) setUserList(result.data);
       else {
-        showAlert("Can't get user list");
+        showAlert("无法获取用户列表");
         router.push("/login");
       }
     } catch (error) {
-      showAlert("Something went wrong.");
+      showAlert("出了点问题。");
     } finally {
       setIsLoading(false);
     }
@@ -76,26 +74,25 @@ export default function Home() {
     fetchDetectList();
   }, [pageIndex, pageSize, searchDate, searchUser]);
 
-  if (!t) return <p className="text-white">Loading translations...</p>;
   const TABLE_HEAD = [
-    t("username"),
-    t("taskName"),
-    t("fileName"),
-    t("screeningTime"),
-    t("screeningNumber"),
-    t("activatedNumber"),
-    t("unregistedNumber"),
+    "用户名",
+    "任务名称",
+    "文件名",
+    "筛选时间",
+    "整数",
+    "激活号码",
+    "未注册号码",
   ];
   return (
     <div className="w-full h-full bg-white">
       <div className="w-full flex justify-between items-center p-4">
-        <Typography variant="h6">{t("statusDetectionList")}</Typography>
+        <Typography variant="h6">状态检测列表</Typography>
         <button
           className="flex items-center gap-2"
           onClick={() => fetchDetectList()}
         >
           <BsArrowCounterclockwise strokeWidth={1.5} />
-          <Typography variant="h6">{t("reload")}</Typography>
+          <Typography variant="h6">重新加载</Typography>
         </button>
       </div>
       <hr />
@@ -105,10 +102,9 @@ export default function Home() {
             {userList && (
               <Select
                 type="date"
-                label="Select User"
+                label="选择用户"
                 onChange={(e) => setSearchUser(e)}
               >
-                {/* <Option value={null}>ALL</Option> */}
                 {userList.map((user, index) => (
                   <Option key={index} value={user._id}>
                     {user.realname}
@@ -120,7 +116,7 @@ export default function Home() {
           <div className="w-full md:w-72">
             <Input
               type="date"
-              label="Select Date"
+              label="选择日期"
               value={searchDate?.toISOString().split("T")[0]}
               onChange={(e) => setSearchDate(new Date(e.target.value))}
             />
@@ -144,82 +140,88 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-              {detectList && detectList.length !== 0
-                ? detectList.map((row, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.username}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.taskname}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.fileurl ?? "处理中..."}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {getSimplifiedDateTime(row.createdAt)}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.entirenumber}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="red"
-                            className="font-bold p-4"
-                          >
-                            {row.activenumber != null
-                              ? row.activenumber
-                              : "处理中..."}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="red"
-                            className="font-bold p-4"
-                          >
-                            {row.unregisternumber != null
-                              ? row.unregisternumber
-                              : "处理中..."}
-                          </Typography>
-                        </td>
-                      </tr>
-                    );
-                  })
-                : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
+              {isLoading ? (
+                <TableLoading
+                  isLoading={isLoading}
+                  colSpan={TABLE_HEAD.length}
+                />
+              ) : detectList && detectList.length > 0 ? (
+                detectList.map((row, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal p-4"
+                        >
+                          {row.username}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal p-4"
+                        >
+                          {row.taskname}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal p-4"
+                        >
+                          {row.fileurl ?? "处理中..."}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal p-4"
+                        >
+                          {getSimplifiedDateTime(row.createdAt)}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal p-4"
+                        >
+                          {row.entirenumber}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="red"
+                          className="font-bold p-4"
+                        >
+                          {row.activenumber != null
+                            ? row.activenumber
+                            : "处理中..."}
+                        </Typography>
+                      </td>
+                      <td>
+                        <Typography
+                          variant="small"
+                          color="red"
+                          className="font-bold p-4"
+                        >
+                          {row.unregisternumber != null
+                            ? row.unregisternumber
+                            : "处理中..."}
+                        </Typography>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <TableNoData colSpan={TABLE_HEAD.length} />
+              )}
             </tbody>
           </table>
         </div>

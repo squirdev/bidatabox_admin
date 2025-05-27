@@ -16,7 +16,7 @@ const TopBar = ({ sidebarShow, setSidebarShow }) => {
         <BsTextIndentLeft className="w-6 h-6 text-red-300" />
       </button>
       <div className="flex justify-center items-center gap-6">
-        <LanguageDropDown />
+        {/* <LanguageDropDown /> */}
         <ProfileDropDown />
       </div>
     </div>

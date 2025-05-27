@@ -15,7 +15,6 @@ import { login } from "../../../redux/authSlice";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { t } = useLanguage();
   const { showAlert } = useAlert();
   const router = useRouter();
   const [username, setUserName] = useState("");
@@ -26,22 +25,21 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) {
-      showAlert("Please input all details");
+      showAlert("请输入所有详细信息");
       return;
     }
     setIsLoading(true);
     const result = await signIn(username, password);
     if (result) {
-      showAlert("Login Successfully", "success");
+      showAlert("登录成功", "success");
       dispatch(login({ token: result.token, user: result.user }));
       router.push("/");
     } else {
-      showAlert("Invalid account. Try again");
+      showAlert("帐户无效。请重试");
     }
     setIsLoading(false);
   };
 
-  if (!t) return <p className="text-white">Loading translations...</p>;
   return (
     <div className="w-full h-full flex justify-center items-center">
       <Card
@@ -50,19 +48,19 @@ export default function Home() {
         className="p-6 shadow-xl shadow-gray-400"
       >
         <Typography variant="h4" color="blue-gray">
-          Administrator Dashboard
+          管理员仪表板
         </Typography>
         <Typography color="gray" className="mt-1 font-normal">
-          {t("loginToAccountDescription")}
+          请输入您的账号和密码以继续
         </Typography>
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="h6" color="blue-gray" className="-mb-3">
-              {t("account")}
+              帐户
             </Typography>
             <Input
               value={username}
-              placeholder={t("account")}
+              placeholder={"帐户"}
               onChange={(e) => setUserName(e.target.value)}
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -70,13 +68,13 @@ export default function Home() {
               }}
             />
             <Typography variant="h6" color="blue-gray" className="-mb-3">
-              {t("password")}
+              密码
             </Typography>
             <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type={t("password")}
-              placeholder={t("password")}
+              type="password"
+              placeholder="密码"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
                 className: "before:content-none after:content-none",
@@ -91,7 +89,7 @@ export default function Home() {
             className="mt-6 flex justify-center"
             fullWidth
           >
-            {t("signin")}
+            登录
           </Button>
         </form>
       </Card>

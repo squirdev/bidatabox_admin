@@ -5,12 +5,12 @@ const { TbCoinYenFilled } = require("react-icons/tb");
 const OperateButtonGroup = ({ index, handleUpdate, handleCharge }) => {
   return (
     <>
-      <Tooltip content="Update User">
+      <Tooltip content="更新用户">
         <IconButton variant="text" onClick={() => handleUpdate(index)}>
           <BiSolidEdit strokeWidth={0.1} className="h-5 w-5 text-green-700" />
         </IconButton>
       </Tooltip>
-      <Tooltip content="Charge User">
+      <Tooltip content="收费用户">
         <IconButton variant="text" onClick={() => handleCharge(index)}>
           <TbCoinYenFilled
             strokeWidth={0.1}

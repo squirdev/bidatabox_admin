@@ -17,14 +17,14 @@ import { getRemainBalance } from "./api/service";
 import TablePagination from "./components/tablePagination";
 
 const TABLE_HEAD = [
-  "No",
-  "User Name",
-  "Entire Number",
-  "Activity Type",
-  "Price per 10000",
-  "User Consume",
-  "Benefit",
-  "Time",
+  "编号",
+  "用户名",
+  "整数",
+  "活动类型",
+  "每10000个价格",
+  "用户消费金额",
+  "福利金额",
+  "时间",
 ];
 
 export default function Home() {
@@ -108,14 +108,14 @@ export default function Home() {
   return (
     <div className="w-full h-full bg-white">
       <div className="w-full flex justify-between items-center p-4">
-        <Typography variant="h6">DashBoard</Typography>
+        <Typography variant="h6">仪表板</Typography>
         <div className="flex gap-4">
           <button
             className="flex items-center gap-2"
             onClick={() => fetchActivityLogList()}
           >
             <BsArrowCounterclockwise strokeWidth={1.5} />
-            <Typography variant="h6">Reload</Typography>
+            <Typography variant="h6">重新加载</Typography>
           </button>
         </div>
       </div>
@@ -127,7 +127,7 @@ export default function Home() {
               {userList && (
                 <Select
                   type="date"
-                  label="Select User"
+                  label="选择用户"
                   onChange={(e) => setSearchUser(e)}
                 >
                   {/* <Option value={null}>ALL</Option> */}
@@ -142,14 +142,14 @@ export default function Home() {
             <div className="w-full md:w-72">
               <Input
                 type="date"
-                label="Select Date"
+                label="选择日期"
                 value={searchDate?.toISOString().split("T")[0]}
                 onChange={(e) => setSearchDate(new Date(e.target.value))}
               />
             </div>
           </div>
           <div className="flex gap-2 items-end">
-            <Typography variant="h5">Remain Balance:</Typography>
+            <Typography variant="h5">剩余余额:</Typography>
             <Typography variant="h4" color="red">
               {balance}
             </Typography>

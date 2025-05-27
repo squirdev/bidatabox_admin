@@ -1,24 +1,13 @@
 "use client";
 
-import {
-  Button,
-  IconButton,
-  Input,
-  Option,
-  Select,
-  Spinner,
-  Tooltip,
-  Typography,
-} from "@material-tailwind/react";
+import { Input, Option, Select, Typography } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 
-import { BsArrowCounterclockwise, BsDownload } from "react-icons/bs";
-import { AiFillDelete } from "react-icons/ai";
+import { BsArrowCounterclockwise } from "react-icons/bs";
 import { useLanguage } from "../../../context/LanguageProvider";
 import { useEffect, useState } from "react";
-import { socialDeleteRow, socialDetectList } from "../api/service";
+import { socialDetectList } from "../api/service";
 import { getSimplifiedDateTime } from "../helper";
-import Link from "next/link";
 import { useAlert } from "../../../context/alertContext";
 import { useRouter } from "next/navigation";
 import TableLoading from "../components/tableLoading";
@@ -37,8 +26,6 @@ export default function Home() {
   const [userList, setUserList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuth } = useSelector((state) => state.auth);
-  const { t } = useLanguage();
   const { showAlert } = useAlert();
   const router = useRouter();
 
@@ -48,11 +35,11 @@ export default function Home() {
       const result = await getUserList();
       if (result.data) setUserList(result.data);
       else {
-        showAlert("Can't get user list");
+        showAlert("无法获取用户列表");
         router.push("/login");
       }
     } catch (error) {
-      showAlert("Something went wrong.");
+      showAlert("出了点问题。");
       router.push("/login");
     } finally {
       setIsLoading(false);
@@ -86,28 +73,27 @@ export default function Home() {
     fetchDetectList();
   }, [pageIndex, pageSize, searchDate, searchUser, searchType]);
 
-  if (!t) return <p className="text-white">Loading translations...</p>;
   const TABLE_HEAD = [
-    t("username"),
-    t("taskName"),
-    t("screeningTime"),
-    t("where"),
-    t("type"),
-    t("screeningNumber"),
-    t("validNumber"),
-    t("activatedNumber"),
-    t("unknownNumber"),
+    "用户名",
+    "任务名称",
+    "筛选时间",
+    "在哪里",
+    "类型",
+    "整数",
+    "有效号码",
+    "激活号码",
+    "未知数",
   ];
   return (
     <div className="w-full h-full bg-white">
       <div className="w-full flex justify-between items-center p-4">
-        <Typography variant="h6">{t("statusDetectionList")}</Typography>
+        <Typography variant="h6">状态检测列表</Typography>
         <button
           className="flex items-center gap-2"
           onClick={() => fetchDetectList()}
         >
           <BsArrowCounterclockwise strokeWidth={1.5} />
-          <Typography variant="h6">{t("reload")}</Typography>
+          <Typography variant="h6">重新加载</Typography>
         </button>
       </div>
       <hr />
@@ -117,10 +103,9 @@ export default function Home() {
             {userList && (
               <Select
                 type="date"
-                label="Select User"
+                label="选择用户"
                 onChange={(e) => setSearchUser(e)}
               >
-                {/* <Option value={null}>ALL</Option> */}
                 {userList.map((user, index) => (
                   <Option key={index} value={user._id}>
                     {user.realname}
@@ -132,7 +117,7 @@ export default function Home() {
           <div className="w-full md:w-72">
             <Input
               type="date"
-              label="Select Date"
+              label="选择日期"
               value={searchDate?.toISOString().split("T")[0]}
               onChange={(e) => setSearchDate(new Date(e.target.value))}
             />
@@ -140,7 +125,7 @@ export default function Home() {
           <div className="w-full md:w-72">
             <Select
               type="date"
-              label="Select Detect Type(TG or WS)"
+              label="选择检测类型（TG 或 WS）"
               onChange={(e) => setSearchType(e)}
             >
               <Option value="TG">Telegram</Option>

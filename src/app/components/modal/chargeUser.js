@@ -35,9 +35,9 @@ const ChargeUserModal = ({ open, userData, setOpen }) => {
       chargeAmount
     );
     if (result) {
-      showAlert("User was charged successfully", "success");
+      showAlert("用户已成功扣款", "success");
     } else {
-      showAlert("User charge failed. Something went wrong");
+      showAlert("用户充值失败。出现问题");
     }
     handleOpen();
     setIsLoading(false);
@@ -48,7 +48,7 @@ const ChargeUserModal = ({ open, userData, setOpen }) => {
       <DialogBody>
         <form className="w-full flex flex-col gap-8">
           <Input
-            label="Charge Amount"
+            label="收费金额"
             type="number"
             variant="static"
             value={chargeAmount}
@@ -59,12 +59,12 @@ const ChargeUserModal = ({ open, userData, setOpen }) => {
       <DialogFooter>
         <div className="w-full flex justify-between items-end">
           <div className="flex gap-1">
-            <Typography variant="small">Current Balance:</Typography>
-            <Typography variant="small">{balance}</Typography>
+            <Typography variant="small">当前余额:</Typography>
+            <Typography variant="small">{balance?.toFixed(2)}</Typography>
           </div>
           <div className="flex">
             <Button variant="red" onClick={handleOpen} className="mr-1">
-              <span>Cancel</span>
+              <span>取消</span>
             </Button>
             <Button
               color="green"
@@ -72,7 +72,7 @@ const ChargeUserModal = ({ open, userData, setOpen }) => {
               loading={isLoading}
               onClick={handleChargeUser}
             >
-              <span>Charge</span>
+              <span>收费</span>
             </Button>
           </div>
         </div>

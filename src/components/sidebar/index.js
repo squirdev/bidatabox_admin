@@ -1,44 +1,40 @@
 import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { BsFillGridFill, BsPhoneVibrateFill } from "react-icons/bs";
 
-import { useLanguage } from "../../../context/LanguageProvider";
-import { useSelector } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineUsergroupAdd, AiFillDashboard } from "react-icons/ai";
 import { TbCoinYenFilled } from "react-icons/tb";
 
 const SideBar = ({ sidebarShow }) => {
-  const { t } = useLanguage();
   const SIDE_BAR_INFO = [
     {
-      title: "Dashboard",
+      title: "仪表板",
       icon: AiFillDashboard,
       url: "/",
     },
     {
-      title: "User Management",
+      title: "用户管理",
       icon: AiOutlineUsergroupAdd,
       url: "/user",
     },
     {
-      title: "Days Detect",
+      title: "天检测",
       icon: BsFillGridFill,
       url: "/daydetectlist",
     },
     {
-      title: "Phone Detect",
+      title: "手机检测",
       icon: BsPhoneVibrateFill,
       url: "/phonedetectlist",
     },
     {
-      title: "Charge Log",
+      title: "收费日志",
       icon: TbCoinYenFilled,
       url: "/chargeloglist",
     },
   ];
 
-  if (!t) return <p className="text-white">Loading translations...</p>;
   return (
     <div className="flex">
       <Card

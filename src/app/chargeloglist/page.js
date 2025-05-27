@@ -72,17 +72,17 @@ export default function Home() {
   }, [pageIndex, pageSize, searchDate, searchUser]);
 
   if (!t) return <p className="text-white">Loading translations...</p>;
-  const TABLE_HEAD = ["No", "User Name", "Amount", "Charge Date"];
+  const TABLE_HEAD = ["编号", "用户名", "数量", "收费日期"];
   return (
     <div className="w-full h-full bg-white">
       <div className="w-full flex justify-between items-center p-4">
-        <Typography variant="h6">User Charge Logs</Typography>
+        <Typography variant="h6">用户收费日志</Typography>
         <button
           className="flex items-center gap-2"
           onClick={() => fetchChargeLogList()}
         >
           <BsArrowCounterclockwise strokeWidth={1.5} />
-          <Typography variant="h6">{t("reload")}</Typography>
+          <Typography variant="h6">重新加载</Typography>
         </button>
       </div>
       <hr />
@@ -92,10 +92,9 @@ export default function Home() {
             {userList && (
               <Select
                 type="date"
-                label="Select User"
+                label="选择用户"
                 onChange={(e) => setSearchUser(e)}
               >
-                {/* <Option value={null}>ALL</Option> */}
                 {userList.map((user, index) => (
                   <Option key={index} value={user._id}>
                     {user.realname}
@@ -107,7 +106,7 @@ export default function Home() {
           <div className="w-full md:w-72">
             <Input
               type="date"
-              label="Select Date"
+              label="选择日期"
               value={searchDate?.toISOString().split("T")[0]}
               onChange={(e) => setSearchDate(new Date(e.target.value))}
             />

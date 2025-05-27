@@ -9,17 +9,14 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { AiOutlinePoweroff } from "react-icons/ai";
-import { useLanguage } from "../../../context/LanguageProvider";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/authSlice";
 import { useRouter } from "next/navigation";
 
 const ProfileDropDown = () => {
   const [updatePasswordModalShow, setUpdatePasswordModalShow] = useState(false);
-  const { t } = useLanguage();
   const dispatch = useDispatch();
   const router = useRouter();
-  if (!t) return <p className="text-white">Loading translations...</p>;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -43,7 +40,7 @@ const ProfileDropDown = () => {
       <MenuList>
         <div className="py-2 outline-none">
           <Typography variant="small" className="font-medium font-bold">
-            {t("welcome")}
+            欢迎
           </Typography>
         </div>
         {/* <MenuItem
@@ -59,7 +56,7 @@ const ProfileDropDown = () => {
         <MenuItem className="flex items-center gap-2" onClick={handleLogout}>
           <AiOutlinePoweroff />
           <Typography variant="small" className="font-medium">
-            {t("logout")}
+            登出
           </Typography>
         </MenuItem>
       </MenuList>

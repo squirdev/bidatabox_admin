@@ -19,14 +19,14 @@ import TableLoading from "../components/tableLoading";
 import TableNoData from "../components/tableNoData";
 
 const TABLE_HEAD = [
-  "No",
-  "User Name",
-  "Password",
-  "Real Name",
-  "Balance",
-  "Active",
-  "Created Time",
-  "Operating",
+  "编号",
+  "用户名",
+  "密码",
+  "真实姓名",
+  "剩余余额",
+  "积极的",
+  "创建时间",
+  "操作",
 ];
 
 export default function Home() {
@@ -47,11 +47,11 @@ export default function Home() {
       const result = await getUserList();
       if (result.data) setUserList(result.data);
       else {
-        showAlert("Can't get user list");
+        showAlert("无法获取用户列表");
         router.push("/login");
       }
     } catch (error) {
-      showAlert("Something went wrong.");
+      showAlert("出了点问题。");
       router.push("/login");
     } finally {
       setIsLoading(false);
@@ -111,13 +111,13 @@ export default function Home() {
         setOpen={setChargeUserModalShow}
       />
       <div className="w-full flex justify-between items-center p-4">
-        <Typography variant="h6">User Management</Typography>
+        <Typography variant="h6">用户管理</Typography>
         <button
           className="flex items-center gap-2"
           onClick={() => fetchUserList()}
         >
           <BsArrowCounterclockwise strokeWidth={1.5} />
-          <Typography variant="h6">Reload</Typography>
+          <Typography variant="h6">重新加载</Typography>
         </button>
       </div>
       <hr />
@@ -129,7 +129,7 @@ export default function Home() {
             className="flex items-center gap-2"
           >
             <AiOutlineUserAdd className="w-5 h-5" />
-            Add new User
+            添加新用户
           </Button>
         </div>
         <table className="w-full min-w-max table-auto text-left shadow-md">
@@ -168,7 +168,9 @@ export default function Home() {
                       <Typography variant="small">{row.realname}</Typography>
                     </td>
                     <td>
-                      <Typography variant="small">{row.balance}</Typography>
+                      <Typography variant="small">
+                        {row.balance?.toFixed(2)}
+                      </Typography>
                     </td>
                     <td>
                       <Switch

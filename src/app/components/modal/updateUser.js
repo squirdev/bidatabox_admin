@@ -42,21 +42,21 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
 
     const result = await updateUser(userData._id, userName, password, realName);
     if (result) {
-      showAlert("User was updated successfully", "success");
+      showAlert("用户已成功更新", "success");
     } else {
-      showAlert("User update failed. Something went wrong");
+      showAlert("用户更新失败。出现问题");
     }
     handleOpen();
     setIsLoading(false);
   };
   return (
     <Dialog open={open} handler={handleOpen}>
-      <DialogHeader>Update User</DialogHeader>
+      <DialogHeader>更新用户</DialogHeader>
       <DialogBody>
         <form className="w-full flex flex-col gap-8">
           <div className="relative">
             <Input
-              label="User Name"
+              label="用户名"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -71,7 +71,7 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
           </div>
           <div className="relative">
             <Input
-              label="Password"
+              label="密码"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -85,7 +85,7 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
             </Button>
           </div>
           <Input
-            label="Real Name"
+            label="真实姓名"
             value={realName}
             onChange={(e) => setRealName(e.target.value)}
           />
@@ -93,10 +93,10 @@ const UpdateUserModal = ({ open, userData, setOpen }) => {
       </DialogBody>
       <DialogFooter>
         <Button variant="red" onClick={handleOpen} className="mr-1">
-          <span>Cancel</span>
+          <span>取消</span>
         </Button>
         <Button color="green" loading={isLoading} onClick={handleUpdateUser}>
-          <span>Update</span>
+          <span>更新</span>
         </Button>
       </DialogFooter>
     </Dialog>

@@ -7,7 +7,7 @@ const TablePagination = ({ pageIndex, pageSize, totalCount, setPageIndex }) => {
   return (
     <div className="flex items-center justify-between border-t border-blue-gray-50 p-4">
       <Typography variant="small" color="blue-gray" className="font-normal">
-        Page {pageIndex + 1} of {Math.ceil(totalCount / pageSize)} ({" Total: "}
+        页 {pageIndex + 1} of {Math.ceil(totalCount / pageSize)} ({" 全部: "}
         {totalCount} )
       </Typography>
       <div className="flex gap-2">
@@ -19,7 +19,7 @@ const TablePagination = ({ pageIndex, pageSize, totalCount, setPageIndex }) => {
             if (pageIndex > 0) setPageIndex((curIndex) => curIndex - 1);
           }}
         >
-          {t("previous")}
+          以前
         </Button>
         <Button
           variant="outlined"
@@ -30,7 +30,7 @@ const TablePagination = ({ pageIndex, pageSize, totalCount, setPageIndex }) => {
               setPageIndex((curIndex) => curIndex + 1);
           }}
         >
-          {t("next")}
+          下一页
         </Button>
       </div>
     </div>
