@@ -19,12 +19,12 @@ const SideBar = ({ sidebarShow }) => {
       url: "/user",
     },
     {
-      title: "天检测",
+      title: "天数检测",
       icon: BsFillGridFill,
       url: "/daydetectlist",
     },
     {
-      title: "手机检测",
+      title: "空号检测",
       icon: BsPhoneVibrateFill,
       url: "/phonedetectlist",
     },

@@ -26,7 +26,7 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>admin QiXiang</title>
+        <title>Admin QiXiang</title>
       </head>
       <body className="flex">
         <ReduxProvider>
