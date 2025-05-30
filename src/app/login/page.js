@@ -1,12 +1,5 @@
 "use client";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
-import { useLanguage } from "../../../context/LanguageProvider";
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { useAlert } from "../../../context/alertContext";
 import { signIn } from "../api/auth";
