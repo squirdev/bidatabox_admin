@@ -157,18 +157,18 @@ export default function Home() {
         <div className="flex items-center gap-4">
           <Typography variant="small" className="p-4">
             总整数:{" "}
-            {activityLogList.reduce((acc, row) => acc + row.entirenumber, 0)}
+            {activityLogList?.reduce((acc, row) => acc + row.entirenumber, 0)}
           </Typography>
           <Typography variant="small" className="p-4">
             总用户消费金额:{" "}
             {activityLogList
-              .reduce((acc, row) => acc + row.consume, 0)
+              ?.reduce((acc, row) => acc + row.consume, 0)
               .toFixed(3)}
           </Typography>
           <Typography variant="small" className="p-4">
             总福利金额:{" "}
             {activityLogList
-              .reduce((acc, row) => acc + row.benefit, 0)
+              ?.reduce((acc, row) => acc + row.benefit, 0)
               .toFixed(3)}
           </Typography>
         </div>
