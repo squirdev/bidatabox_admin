@@ -130,7 +130,6 @@ export default function Home() {
                   label="选择用户"
                   onChange={(e) => setSearchUser(e)}
                 >
-                  {/* <Option value={null}>ALL</Option> */}
                   {userList.map((user, index) => (
                     <Option key={index} value={user._id}>
                       {user.realname}
@@ -155,6 +154,24 @@ export default function Home() {
             </Typography>
           </div>
         </div>
+        <div className="flex items-center gap-4">
+          <Typography variant="small" className="p-4">
+            总整数:{" "}
+            {activityLogList.reduce((acc, row) => acc + row.entirenumber, 0)}
+          </Typography>
+          <Typography variant="small" className="p-4">
+            总用户消费金额:{" "}
+            {activityLogList
+              .reduce((acc, row) => acc + row.consume, 0)
+              .toFixed(3)}
+          </Typography>
+          <Typography variant="small" className="p-4">
+            总福利金额:{" "}
+            {activityLogList
+              .reduce((acc, row) => acc + row.benefit, 0)
+              .toFixed(3)}
+          </Typography>
+        </div>
         <table className="w-full min-w-max table-auto text-left shadow-md">
           <thead>
             <tr>
@@ -172,40 +189,26 @@ export default function Home() {
           </thead>
           <tbody>
             <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-            {activityLogList && activityLogList.length != 0
+            {activityLogList && activityLogList.length > 0
               ? activityLogList.map((row, index) => {
                   return (
                     <tr key={index} className="hover:bg-gray-100">
-                      <td>
-                        <Typography variant="small" className="p-4">
-                          {index + 1}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">{row.username}</Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">
-                          {row.entirenumber}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">{row.type}</Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">{row.perprice}</Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">{row.consume}</Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">{row.benefit}</Typography>
-                      </td>
-                      <td>
-                        <Typography variant="small">
-                          {getSimplifiedDateTime(row.createdAt)}
-                        </Typography>
-                      </td>
+                      {[
+                        index + 1,
+                        row.username,
+                        row.entirenumber,
+                        row.type,
+                        row.perprice * 10000,
+                        row.consume.toFixed(3),
+                        row.benefit.toFixed(3),
+                        getSimplifiedDateTime(row.createdAt),
+                      ].map((item, index) => (
+                        <td key={index}>
+                          <Typography variant="small" className="p-4">
+                            {item}
+                          </Typography>
+                        </td>
+                      ))}
                     </tr>
                   );
                 })
